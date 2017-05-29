@@ -62,6 +62,17 @@ function promiseUserExists(user: firebase.User) {
   })
 }
 
+async function promiseUserExists2(user: firebase.User) {
+  try {
+    const usersReference = firebaseDb.ref('users')
+    const snapshot = await usersReference.child(user.uid).once('value')
+
+    return snapshot.val() !== null
+  } catch(e) {
+    throw e
+  }
+}
+
 export async function userExists(user: firebase.User) {
   try {
     return await promiseUserExists(user)
