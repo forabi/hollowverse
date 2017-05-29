@@ -48,6 +48,24 @@ export async function logout(): Promise<facebookSdk.IAuthResponse | void> {
   }
 }
 
+export async function logout2(): Promise<facebookSdk.IAuthResponse | void> {
+  try {
+    FB.logout((response) => {
+      return response
+    })
+  } catch (err) {
+    throw err
+  }
+}
+
+export async function logout3(): Promise<facebookSdk.IAuthResponse | void> {
+  try {
+    FB.logout(() => null)
+  } catch (err) {
+    throw err
+  }
+}
+
 export async function initSdk(): Promise<void> {
   try {
     return await FB.init({
