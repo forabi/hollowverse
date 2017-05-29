@@ -2,9 +2,17 @@ import {errors} from '../constants/errors'
 
 export async function getLoginStatus() {
   try {
+    // #1
     return await FB.getLoginStatus((response) => {
       return response
     })
+
+    // #2
+    // return await new Promise((resolve) => {
+    //   FB.getLoginStatus((res) => {
+    //     resolve(res)
+    //   })
+    // })
   } catch (err) {
     throw err
   }

@@ -73,6 +73,8 @@ function* requestUpdateLoginStatus() {
 
     const facebookAuthResponse = yield facebook.getLoginStatus()
 
+    console.log('facebookAuthResponse', facebookAuthResponse)
+
     if (facebookAuthResponse.status === 'connected') {
       yield put(actions.setIsLoginPending(true))
       yield firebase.loginOrRegister(facebookAuthResponse)
