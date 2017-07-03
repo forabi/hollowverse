@@ -32,4 +32,28 @@ export function promisify<R>(
     });
 }
 
+export function isValidEmail(email: string): boolean {
+  const emailPattern = /.+@.+\..+/;
+
+  return emailPattern.test(email);
+}
+
+export function hasSentence(message: string): boolean {
+  const minLength = 19;
+  const replaceWithSpace = message.replace(/\s+/g, ' ');
+
+  if (replaceWithSpace.length > minLength) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function hasName(name: string): boolean {
+  const nameCharacter = name.charAt(0);
+  const namePattern = /[^-_$!"\()[\]{}?+=%^&*:@~#';/,.<>\\|`\s]/g;
+
+  return namePattern.test(nameCharacter);
+}
+
 export { cn };

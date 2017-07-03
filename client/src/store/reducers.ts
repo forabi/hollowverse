@@ -29,6 +29,15 @@ interface IAppState {
   notablePerson: INotablePersonSchema | null;
   userData: IUserSchema | null;
   displayWarning: boolean;
+  emailInputValue: string;
+  nameInputValue: string;
+  messageInputValue: string;
+  emailHasBlur: boolean;
+  nameHasBlur: boolean;
+  messageHasBlur: boolean;
+  isSubmitPending: boolean;
+  submitSuccess: boolean;
+  submitFail: boolean;
 }
 
 // Make it an immutable type
@@ -49,6 +58,15 @@ const initialAppState: AppState = {
   notablePerson: null,
   userData: null,
   displayWarning: false,
+  emailHasBlur: false,
+  nameHasBlur: false,
+  messageHasBlur: false,
+  emailInputValue: '',
+  nameInputValue: '',
+  messageInputValue: '',
+  isSubmitPending: false,
+  submitSuccess: false,
+  submitFail: false,
 };
 
 // IRootState contains IAppState as well as other state keys that are required by external
@@ -150,6 +168,33 @@ const singleActionReducers = {
   >('userData'),
   [ActionTypes.toggleWarning]: createSingleActionSimpleReducer<boolean>(
     'displayWarning',
+  ),
+  [ActionTypes.setEmailHasBlur]: createSingleActionSimpleReducer<boolean>(
+    'emailHasBlur',
+  ),
+  [ActionTypes.setNameHasBlur]: createSingleActionSimpleReducer<boolean>(
+    'nameHasBlur',
+  ),
+  [ActionTypes.setMessageHasBlur]: createSingleActionSimpleReducer<boolean>(
+    'messageHasBlur',
+  ),
+  [ActionTypes.setEmailInputValue]: createSingleActionSimpleReducer<string>(
+    'emailInputValue',
+  ),
+  [ActionTypes.setNameInputValue]: createSingleActionSimpleReducer<string>(
+    'nameInputValue',
+  ),
+  [ActionTypes.setMessageInputValue]: createSingleActionSimpleReducer<string>(
+    'messageInputValue',
+  ),
+  [ActionTypes.setIsSubmitPending]: createSingleActionSimpleReducer<boolean>(
+    'isSubmitPending',
+  ),
+  [ActionTypes.setSubmitSuccess]: createSingleActionSimpleReducer<boolean>(
+    'submitSuccess',
+  ),
+  [ActionTypes.setSubmitFail]: createSingleActionSimpleReducer<boolean>(
+    'submitFail',
   ),
 };
 

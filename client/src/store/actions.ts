@@ -8,9 +8,14 @@
 //
 import { push } from 'react-router-redux';
 import { INotablePersonSchema, IUserSchema } from 'typings/dataSchema';
-import { HvError } from 'typings/typeDefinitions';
+import { HvError, IContactFormData } from 'typings/typeDefinitions';
 import { stringEnum } from 'utils/utils';
 import { IAlgoliaSearchResults } from 'vendor/algolia';
+
+export interface IForm<IContactFormData> {
+  type: object;
+  payload: IContactFormData;
+}
 
 /** Custom type definition of a Redux Action */
 export interface IAction<PayloadType> {
@@ -92,6 +97,37 @@ export const actions = {
     payload,
   }),
   requestUserData: (payload: string) => ({ type: 'requestUserData', payload }),
+  setEmailHasBlur: (payload: boolean) => ({ type: 'setEmailHasBlur', payload }),
+  setNameHasBlur: (payload: boolean) => ({ type: 'setNameHasBlur', payload }),
+  setMessageHasBlur: (payload: boolean) => ({
+    type: 'setMessageHasBlur',
+    payload,
+  }),
+  setEmailInputValue: (payload: string) => ({
+    type: 'setEmailInputValue',
+    payload,
+  }),
+  setNameInputValue: (payload: string) => ({
+    type: 'setNameInputValue',
+    payload,
+  }),
+  setMessageInputValue: (payload: string) => ({
+    type: 'setMessageInputValue',
+    payload,
+  }),
+  setIsSubmitPending: (payload: boolean) => ({
+    type: 'setIsSubmitPending',
+    payload,
+  }),
+  setSubmitSuccess: (payload: boolean) => ({
+    type: 'setSubmitSuccess',
+    payload,
+  }),
+  setSubmitFail: (payload: boolean) => ({ type: 'setSubmitFail', payload }),
+  requestSubmitFormValues: (payload: IContactFormData) => ({
+    type: 'requestSubmitFormValues',
+    payload,
+  }),
 };
 
 // `ActionTypes` can have any string value that corresponds with a key in the `actions` object above

@@ -9,3 +9,9 @@ export abstract class HvError extends Error {
   /** User-friendly error message */
   message: string;
 }
+
+export interface IContactFormData {
+  email: string;
+  name: string;
+  message: string;
+}
