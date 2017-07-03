@@ -67,7 +67,11 @@ class ContactUsFormClass extends React.Component<ComponentProps, undefined> {
     return (
       <div className={css(styles.pageContactForm)}>
         <GlobalSpinner />
-        {p.submitSuccess ? <div>Your message was sent successfully. We'll get back with you soon!</div> : ''}
+        {p.submitSuccess ?
+          <div className={css(styles.messageSuccess)}>
+            Your message was sent successfully. We'll get back with you soon!
+          </div>
+          : ''}
         <div className={css(styles.formContainer, submitSuccessTrue)}>
           <h1 className={css(common.titleTypography, styles.formTitle)}>Contact us</h1>
           <Form onSubmit={() => this.handleFormSubmit()} noValidate>
@@ -94,6 +98,11 @@ class ContactUsFormClass extends React.Component<ComponentProps, undefined> {
               onChange={({target: {value}}) => this.handleMessageInputChange(value)}
               onBlur={(event) => this.onMessageBlur(event)}
             />
+            {p.submitFail ?
+              <div className={css(styles.submitFail)}>
+                Something went wrong,<br/>please try again!
+              </div>
+              : ''}
             <div className={css(styles.submitButtonContainer)}>
               <input
                 className={css(common.textTypography, common.palette, styles.submitButton)}
@@ -107,7 +116,6 @@ class ContactUsFormClass extends React.Component<ComponentProps, undefined> {
               />
             </div>
           </Form>
-          {p.submitFail ? <div className={css(styles.submitFail)}>Something went wrong, please try again!</div> : ''}
         </div>
       </div>
     )
