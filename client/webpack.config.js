@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const WebpackHTMLPlugin = require('html-webpack-plugin');
+const ShakePlugin = require('webpack-common-shake').Plugin;
 
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const NameAllModulesPlugin = require('name-all-modules-plugin');
@@ -486,6 +487,13 @@ const config = {
 
     // SVG sprites
     new SpriteLoaderPlugin(),
+
+    new ShakePlugin({
+      warnings: {
+        global: true,
+        module: true,
+      },
+    }),
 
     // Required for debugging in development and for long-term caching in production
     new webpack.NamedModulesPlugin(),
