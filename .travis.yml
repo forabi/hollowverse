@@ -3,15 +3,21 @@ services:
 
 script:
   - if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then 
-      docker run
-        -v $(pwd):/hollowverse
-        -e BRANCH=$TRAVIS_BRANCH
-        -e PROJECT=hollowverse-c9cad
-        -e IV=$encrypted_744738cd0ff8_iv
-        -e KEY=$encrypted_744738cd0ff8_key
-        -e SERVICE_ACCOUNT=$GAE_SERVICE_ACCOUNT
-        hollowverse/hollowverse-gae
-      ;
+      num_attempts=0;
+      while :  do
+        num_attempts=$(( $num_attempts + 1 ));
+        docker run
+          -v $(pwd):/hollowverse
+          -e BRANCH=$TRAVIS_BRANCH
+          -e PROJECT=hollowverse-c9cad
+          -e IV=$encrypted_744738cd0ff8_iv
+          -e KEY=$encrypted_744738cd0ff8_key
+          -e SERVICE_ACCOUNT=$GAE_SERVICE_ACCOUNT
+          hollowverse/hollowverse-gae
+        ;
+        if [ "$?" == 0 ]; then break; fi;
+        if [ "$num_attemps" == 5 ]; then exit 1; fi;
+      done
     fi
 
 notifications:
