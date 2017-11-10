@@ -1,0 +1,39 @@
+@import 'variables.scss';
+
+.error-message {
+  margin: auto;
+  text-align: center;
+
+  &-caption {
+    color: $color-text-light;
+    font-size: 16px;
+    padding: 5px 0;
+  }
+
+  &-caption.has-description {
+    color: $color-text-default;
+    font-weight: bold;
+  }
+
+  &-description {
+    color: $color-text-light;
+    margin-top: 5px;
+  }
+
+  &-button {
+    font-size: 14px;
+    padding: 10px 20px;
+    color: $color-blue;
+    margin: 20px 0;
+    border: 1px solid rgba(75, 49, 246, 0.8);
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+      border-color: $color-blue;
+      background-color: rgba(75, 49, 246, 0.04);
+    }
+  }
+}

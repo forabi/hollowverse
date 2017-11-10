@@ -2,11 +2,22 @@ import * as React from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { NotablePersonQuery } from '../../../graphqlOperationResultTypes';
-import Event from 'components/Event';
-import PersonDetails from 'components/PersonDetails';
+import { Event } from 'components/Event';
+import { PersonDetails } from 'components/PersonDetails';
 import { LoadableFbComments } from 'components/FbComments/loadable';
+import { MessageWithIcon } from 'components/MessageWithIcon';
+import { SvgIcon } from 'components/SvgIcon';
+import { OptionalIntersectionObserver } from 'components/OptionalIntersectionObserver';
 
 import { prettifyUrl } from 'helpers/url';
+
+import warningIconSymbol from 'icons/warning.svg';
+
+const warningIcon = <SvgIcon {...warningIconSymbol} size={100} />;
+
+const reload = () => {
+  location.reload();
+};
 
 export default graphql<NotablePersonQuery>(
   gql`
@@ -15,6 +26,7 @@ export default graphql<NotablePersonQuery>(
         name
         photoUrl
         summary
+        commentsUrl
         labels {
           id
           text
@@ -44,13 +56,56 @@ export default graphql<NotablePersonQuery>(
     }),
   },
 )(({ data }) => {
-  if (!data || data.error || data.notablePerson === null) {
-    return <div>Error loading</div>;
-  }
-
-  if (data && data.notablePerson) {
+  if (!data) {
+    return (
+      <MessageWithIcon
+        caption="Oops!"
+        description="Something's wrong on our end. Please try again later."
+        actionText="Retry"
+        onActionClick={reload}
+        icon={warningIcon}
+      />
+    );
+  } else if (data && data.loading) {
+    return <div>Loading...</div>;
+  } else if (data.error && data.error.networkError) {
+    return (
+      <MessageWithIcon
+        caption="Are you connected to the internet?"
+        description="Please check that you are connected to the internet and try again"
+        actionText="Retry"
+        onActionClick={reload}
+        icon={warningIcon}
+      />
+    );
+  } else if (data.error) {
+    return (
+      <MessageWithIcon
+        caption={data.error.name}
+        description={data.error.message}
+        actionText="Retry"
+        onActionClick={reload}
+        icon={warningIcon}
+      />
+    );
+  } else if (!data.notablePerson) {
+    return (
+      <MessageWithIcon
+        caption="Not Found"
+        description="We do not have a page for this notable person"
+        icon={warningIcon}
+      />
+    );
+  } else {
     const { notablePerson } = data;
-    const { name, photoUrl, events, labels, summary } = notablePerson;
+    const {
+      name,
+      photoUrl,
+      events,
+      labels,
+      summary,
+      commentsUrl,
+    } = notablePerson;
 
     return (
       <div>
@@ -70,10 +125,16 @@ export default graphql<NotablePersonQuery>(
             sourceName={prettifyUrl(event.sourceUrl)}
           />
         ))}
-        <LoadableFbComments url={'https://hollowverse.com/tom-hanks'} />
+        <OptionalIntersectionObserver rootMargin="0% 0% 25% 0%" triggerOnce>
+          {inView => {
+            if (inView) {
+              return <LoadableFbComments url={commentsUrl} />;
+            } else {
+              return null;
+            }
+          }}
+        </OptionalIntersectionObserver>
       </div>
     );
   }
-
-  return <div>Loading...</div>;
 });

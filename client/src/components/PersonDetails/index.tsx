@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Label from '../Label';
+import { Label } from 'components/Label';
 import './styles.scss';
 
 type PersonDetailsProps = {
@@ -9,17 +9,14 @@ type PersonDetailsProps = {
   labels: Array<{ text: string; id: string }>;
 };
 
-const PersonDetails = ({
+export const PersonDetails = ({
   summary,
   name,
   photoUrl,
   labels,
 }: PersonDetailsProps) => (
   <div className="person-details">
-    <div
-      className="person-details-avatar"
-      style={{ backgroundImage: `url(${photoUrl})` }}
-    />
+    <img className="person-details-avatar" src={photoUrl} alt={name} />
     <div className="person-details-caption">
       Religion, politics, and ideas of
     </div>
@@ -34,5 +31,3 @@ const PersonDetails = ({
     )}
   </div>
 );
-
-export default PersonDetails;

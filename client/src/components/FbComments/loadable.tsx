@@ -1,6 +1,8 @@
 import * as React from 'react';
 import Loadable from 'react-loadable';
 import { importGlobalScript } from 'helpers/importGlobalScript';
+import { MessageWithIcon } from 'components/MessageWithIcon';
+import { LoadingSpinner } from 'components/LoadingSpinner';
 
 export const LoadableFbComments = Loadable({
   async loader() {
@@ -11,5 +13,10 @@ export const LoadableFbComments = Loadable({
     return import('./index');
   },
 
-  loading: () => <div>Loading...</div>,
+  loading: () => (
+    <MessageWithIcon
+      caption="Loading Facebook comments..."
+      icon={<LoadingSpinner />}
+    />
+  ),
 });
