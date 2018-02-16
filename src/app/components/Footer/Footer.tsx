@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import * as classes from './Footer.module.scss';
+import * as classes from './Footer.module.css';
 
 import { Link } from 'react-router-dom';
 

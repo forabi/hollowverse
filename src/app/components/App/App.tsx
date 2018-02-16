@@ -5,8 +5,8 @@ import { ConnectedNavBar } from 'components/NavBar/ConnectedNavBar';
 import { Route, Switch } from 'react-router';
 import { isWhitelistedPage } from 'redirectionMap';
 
-import './App.global.scss';
-import * as classes from './App.module.scss';
+import './App.global.css';
+import * as classes from './App.module.css';
 
 import { LoadableNotablePerson } from 'pages/NotablePerson/LoadableNotablePerson';
 import { LoadableSearchResults } from 'pages/SearchResults/LoadableSearchResults';

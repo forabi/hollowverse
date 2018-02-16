@@ -5,25 +5,9 @@ const { compact } = require('lodash');
 
 const { createBabelConfig } = require('./babel');
 
-const { srcDirectory, excludedPatterns } = require('./variables');
+const { excludedPatterns } = require('./variables');
 
 const { ifReact, ifHot, isProd, shouldTypeCheck, ifProd } = require('./env');
-
-const sassLoaders = [
-  {
-    loader: 'resolve-url-loader',
-    options: {
-      sourceMap: true,
-    },
-  },
-  {
-    loader: 'sass-loader',
-    options: {
-      sourceMap: true,
-      includePaths: [srcDirectory],
-    },
-  },
-];
 
 const postCssPlugins = [
   autoprefixer,
@@ -65,7 +49,6 @@ exports.createGlobalCssLoaders = (isServer = false) => [
       sourceMap: true,
     },
   },
-  ...sassLoaders,
 ];
 
 exports.createCssModulesLoaders = (isServer = false) => [
@@ -104,7 +87,6 @@ exports.createCssModulesLoaders = (isServer = false) => [
       ],
     },
   },
-  ...sassLoaders,
 ];
 
 exports.createScriptRules = (isServer = false) => {

@@ -1,5 +1,4 @@
-@import 'variables.scss';
-@import 'mixins.scss';
+@import 'mixins.css';
 
 @supports (-webkit-background-clip: text) {
   .root {

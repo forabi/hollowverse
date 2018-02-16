@@ -77,7 +77,7 @@ const serverSpecificConfig = {
 
       // Global CSS
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         exclude: [...excludedPatterns, cssModulesPattern],
         use: createGlobalCssLoaders(true),
       },

@@ -22,7 +22,6 @@ const {
   ifEsNext,
 } = require('./env');
 
-
 module.exports.createCommonConfig = () => ({
   devServer:
     ifDev({
@@ -117,7 +116,7 @@ module.exports.createCommonConfig = () => ({
         'react-dom': 'preact-compat',
       }),
     },
-    extensions: ['.tsx', '.ts', '.js', '.css', '.scss', '.module.scss'],
+    extensions: ['.tsx', '.ts', '.js', '.css', '.module.css'],
     modules: [
       // Allow absolute imports from 'src' dir,
       // e.g. `import 'file';` instead of `'../../file';`
@@ -136,7 +135,7 @@ module.exports.createCommonConfig = () => ({
       /node_modules/,
 
       // Ignore auto-generated type definitions for CSS module files
-      /\.s?css\.d\.ts$/,
+      /\.css\.d\.ts$/,
     ]),
 
     // Error handling

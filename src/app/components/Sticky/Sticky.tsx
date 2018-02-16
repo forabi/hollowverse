@@ -6,7 +6,7 @@ import {
   Props as OptionalIntersectionObserverProps,
 } from 'components/OptionalIntersectionObserver/OptionalIntersectionObserver';
 
-import * as classes from './Sticky.module.scss';
+import * as classes from './Sticky.module.css';
 
 type Props = {
   height: number;

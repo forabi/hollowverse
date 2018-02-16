@@ -15,7 +15,7 @@ declare module '*.gql' {
   export = query;
 }
 
-declare module '*.module.scss' {
+declare module '*.module.css' {
   const classes: Record<string, string>;
   export = classes;
 }

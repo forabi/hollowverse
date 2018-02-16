@@ -1,5 +1,3 @@
-@import 'variables.scss';
-
 .root {
   $quoation-mark-margin: 5px;
   $top-offset: 10px;

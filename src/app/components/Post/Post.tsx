@@ -5,7 +5,7 @@ import { Label } from 'components/Label/Label';
 
 import { prettifyUrl } from 'helpers/prettifyUrl';
 
-import * as classes from './Post.module.scss';
+import * as classes from './Post.module.css';
 
 type PostProps = {
   postedAt?: Date | null;

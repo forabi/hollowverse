@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StoreState } from 'store/types';
 
-import * as classes from './SearchResults.module.scss';
+import * as classes from './SearchResults.module.css';
 import Helmet from 'react-helmet-async';
 
 import { Card } from 'components/Card/Card';

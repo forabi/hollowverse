@@ -3,7 +3,7 @@ import cc from 'classcat';
 
 import { RouteComponentProps, Route, Switch } from 'react-router';
 
-import * as classes from './NavBar.module.scss';
+import * as classes from './NavBar.module.css';
 
 import { Sticky } from 'components/Sticky/Sticky';
 import { SvgIcon } from 'components/SvgIcon/SvgIcon';

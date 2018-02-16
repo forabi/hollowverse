@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classes from './NotablePersonSkeleton.module.scss';
+import * as classes from './NotablePersonSkeleton.module.css';
 import { times, random } from 'lodash';
 
 export const NotablePersonSkeleton = () => (

@@ -4,7 +4,7 @@ import { AlgoliaResponse } from 'algoliasearch';
 import { Link } from 'react-router-dom';
 
 import { Square } from 'components/Square/Square';
-import * as classes from './SearchResults.module.scss';
+import * as classes from './SearchResults.module.css';
 
 type ResultsListProps = {
   hits: AlgoliaResponse['hits'];

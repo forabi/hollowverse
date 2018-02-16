@@ -93,7 +93,7 @@ const clientSpecificConfig = {
 
       // Global CSS
       {
-        test: /\.s?css$/,
+        test: /\.css$/,
         exclude: [...excludedPatterns, cssModulesPattern],
         use: extractGlobalCss.extract({
           use: createGlobalCssLoaders(false),

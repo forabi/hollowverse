@@ -1,6 +1,6 @@
 import * as React from 'react';
 import cc from 'classcat';
-import * as classes from './Card.module.scss';
+import * as classes from './Card.module.css';
 
 type Props = React.HTMLAttributes<HTMLDivElement>;
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classes from './LoadingSpinner.module.scss';
+import * as classes from './LoadingSpinner.module.css';
 
 type Props = {
   size?: number;

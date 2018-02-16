@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as classes from './SearchResultsSkeleton.module.scss';
+import * as classes from './SearchResultsSkeleton.module.css';
 import { times } from 'lodash';
 
 export const SearchResultsSkeleton = () => (

@@ -7,7 +7,7 @@ export type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
   errorComponent?: JSX.Element | null;
 };
 
-import * as classes from './Image.module.scss';
+import * as classes from './Image.module.css';
 
 /**
  * This component wraps a regular `<img>` tag and optionally shows

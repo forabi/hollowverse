@@ -25,7 +25,7 @@ import { withRouter, RouteComponentProps } from 'react-router';
 import { forceReload } from 'helpers/forceReload';
 import { DispatchOnLifecycleEvent } from 'components/DispatchOnLifecycleEvent/DispatchOnLifecycleEvent';
 
-import * as classes from './NotablePerson.module.scss';
+import * as classes from './NotablePerson.module.css';
 import query from './NotablePersonQuery.graphql';
 
 import warningIcon from 'icons/warning.svg';

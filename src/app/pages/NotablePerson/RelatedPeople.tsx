@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import * as classes from './RelatedPeople.module.scss';
+import * as classes from './RelatedPeople.module.css';
 
 import { Square } from 'components/Square/Square';
 import { LazyImage } from 'components/LazyImage/LazyImage';
