@@ -1,5 +1,8 @@
 {
-  "extends": ["./node_modules/@hollowverse/common/.eslintrc.json"],
+  "extends": [
+    "./node_modules/@hollowverse/common/eslint/base/.eslintrc.json",
+    "./node_modules/@hollowverse/common/eslint/node/.eslintrc.json"
+  ],
   "plugins": ["graphql"],
   "rules": {
     "graphql/template-strings": [
