@@ -84,9 +84,7 @@ export const PersonDetails = ({
       ) : null}
       <div className={classes.content}>
         <h1 className={classes.name}>
-          <div className={classes.caption}>
-            Religion, politics, and ideas of
-          </div>
+          <div className={classes.caption}>POTATO</div>
           {name}
         </h1>
         {labels && labels.length > 0 ? (

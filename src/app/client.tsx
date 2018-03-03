@@ -11,6 +11,8 @@ import { StoreState } from 'store/types';
 import { unhandledErrorThrown } from 'store/features/logging/actions';
 import { loadIntersectionObserverPolyfill } from 'helpers/loadPolyfill';
 import { HelmetProvider } from 'react-helmet-async';
+// @ts-ignore
+import { AppContainer } from 'react-hot-loader';
 import {
   AppDependenciesContext,
   defaultAppDependencies,
@@ -28,15 +30,17 @@ const { store } = createConfiguredStore({
 
 const renderApp = (NewApp: typeof App = App) => {
   hydrate(
-    <HelmetProvider>
-      <AppDependenciesContext.Provider value={defaultAppDependencies}>
-        <Provider store={store}>
-          <Router history={history}>
-            <NewApp routesMap={routesMap} />
-          </Router>
-        </Provider>
-      </AppDependenciesContext.Provider>
-    </HelmetProvider>,
+    <AppContainer>
+      <HelmetProvider>
+        <AppDependenciesContext.Provider value={defaultAppDependencies}>
+          <Provider store={store}>
+            <Router history={history}>
+              <NewApp routesMap={routesMap} />
+            </Router>
+          </Provider>
+        </AppDependenciesContext.Provider>
+      </HelmetProvider>
+    </AppContainer>,
     // tslint:disable-next-line:no-non-null-assertion
     document.getElementById('app')!,
   );

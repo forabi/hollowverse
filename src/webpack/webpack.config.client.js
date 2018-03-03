@@ -30,15 +30,7 @@ const { createCommonConfig } = require('./webpack.config.common');
 
 const common = createCommonConfig();
 
-const {
-  ifProd,
-  ifDev,
-  ifReact,
-  ifPreact,
-  ifHot,
-  ifPerf,
-  isProd,
-} = require('./env');
+const { ifProd, ifDev, ifPreact, ifHot, ifPerf, isProd } = require('./env');
 
 const extractGlobalCss = new ExtractCssChunks({
   filename: isProd ? '[name].global.[contenthash].css' : '[name].global.css',
@@ -53,7 +45,6 @@ const clientSpecificConfig = {
   target: 'web',
   entry: compact([
     ifHot('webpack-hot-middleware/client'),
-    ifReact(ifHot('react-hot-loader/patch')),
     ifPreact(ifDev('preact/debug')),
     path.join(srcDirectory, 'clientEntry.ts'),
   ]),
