@@ -7,12 +7,12 @@ const {
 
 /**
  * @param {object} options
- * @param {boolean=} options.isNode
+ * @param {boolean=} options.isServer
  */
-module.exports.getAppGlobals = (options = { isNode: false }) => ({
+module.exports.getAppGlobals = (options = { isServer: false }) => ({
   __FORCE_ENABLE_LOGGING__:
     isTest || parseBooleanEnvVariable(process.env.FORCE_ENABLE_LOGGING),
-  __IS_SERVER__: options.isNode && !isTest,
+  __IS_SERVER__: options.isServer && !isTest,
   __IS_DEBUG__: isDebug,
   __BRANCH__: isTest ? 'test' : process.env.BRANCH,
   __COMMIT_ID__: isTest ? '123456' : process.env.COMMIT_ID,

@@ -17,7 +17,7 @@ const ifNotTest = createConditionalWithFallback(!isTest);
 
 /**
  * @param {object} options
- * @param {boolean} options.isNode
+ * @param {boolean} options.isServer
  */
 module.exports.createBabelConfig = options => ({
   presets: compact([
@@ -28,7 +28,7 @@ module.exports.createBabelConfig = options => ({
         loose: false,
         debug: isDebug,
         ignoreBrowserslistConfig: true,
-        targets: options.isNode
+        targets: options.isServer
           ? {
               node: 'current',
             }

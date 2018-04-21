@@ -3,6 +3,7 @@ const normalize = require('postcss-normalize');
 const autoprefixer = require('autoprefixer');
 const cssVariables = require('postcss-css-variables');
 const { compact } = require('lodash');
+const path = require('path');
 
 const { createBabelConfig } = require('./babel');
 
@@ -51,14 +52,14 @@ const postCssPlugins = [
 
 /**
  * @param {object} options
- * @param {boolean=} options.isNode
+ * @param {boolean=} options.isServer
  */
-exports.createGlobalCssLoaders = (options = { isNode: false }) => [
+exports.createGlobalCssLoaders = (options = { isServer: false }) => [
   {
     // For the server bundle, we do not want to generate any CSS files,
     // we are only interested in the class name to use in the SSR markup.
     // That's what css-loader/locals does.
-    loader: options.isNode ? 'css-loader/locals' : 'css-loader',
+    loader: options.isServer ? 'css-loader/locals' : 'css-loader',
     query: {
       minimize: isProd,
       sourceMap: true,
@@ -68,6 +69,7 @@ exports.createGlobalCssLoaders = (options = { isNode: false }) => [
   {
     loader: 'postcss-loader',
     options: {
+      ident: 'postcss',
       plugins: [
         // Minimal cross-browser CSS resets, only contains resets relevant
         // for the targeted browsers as specified in `"browserslist"` in `package.json`
@@ -82,14 +84,14 @@ exports.createGlobalCssLoaders = (options = { isNode: false }) => [
 
 /**
  * @param {object} options
- * @param {boolean=} options.isNode
+ * @param {boolean=} options.isServer
  */
-exports.createCssModulesLoaders = (options = { isNode: false }) => [
+exports.createCssModulesLoaders = (options = { isServer: false }) => [
   {
     // For the server bundle, we do not want to generate any CSS files,
     // we are only interested in the class name to use in the SSR markup.
     // That's what css-loader/locals does.
-    loader: options.isNode
+    loader: options.isServer
       ? 'css-loader/locals'
       : ifProd('typings-for-css-modules-loader') || 'css-loader',
 
@@ -116,6 +118,7 @@ exports.createCssModulesLoaders = (options = { isNode: false }) => [
   },
   {
     loader: 'postcss-loader',
+    ident: 'postcss',
     options: {
       sourceMap: true,
       plugins: [
@@ -129,12 +132,12 @@ exports.createCssModulesLoaders = (options = { isNode: false }) => [
 
 /**
  * @param {object} options
- * @param {boolean} options.isNode
+ * @param {boolean} options.isServer
  */
-exports.createScriptRules = (options = { isNode: false }) => {
-  const babelLoader = {
+exports.createScriptRules = options => {
+  const babelLoader = options.babelLoader || {
     loader: 'babel-loader',
-    options: createBabelConfig({ isNode: options.isNode }),
+    options: createBabelConfig(options),
   };
 
   return [
@@ -142,7 +145,19 @@ exports.createScriptRules = (options = { isNode: false }) => {
     {
       test: /\.jsx?$/,
       exclude: excludedPatterns,
-      use: compact([ifReact(ifHot('react-hot-loader/webpack')), babelLoader]),
+      use: compact([
+        // ifReact(ifHot('react-hot-loader/webpack')),
+        babelLoader,
+      ]),
+    },
+
+    {
+      test: /\.(ts|tsx)$/,
+      loader: 'hot-self-accept-loader',
+      include: [path.join(srcDirectory, 'pages')],
+      options: {
+        extensions: /\.(ts|tsx)$/,
+      },
     },
 
     // TypeScript
@@ -150,7 +165,7 @@ exports.createScriptRules = (options = { isNode: false }) => {
       test: /\.tsx?$/,
       exclude: excludedPatterns,
       use: compact([
-        ifReact(ifHot('react-hot-loader/webpack')),
+        // ifReact(ifHot('react-hot-loader/webpack')),
         babelLoader,
         {
           loader: 'ts-loader',

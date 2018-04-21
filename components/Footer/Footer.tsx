@@ -2,18 +2,20 @@ import React from 'react';
 
 import classes from './Footer.module.scss';
 
-import { Link } from 'react-router-dom';
-
-import logo from 'file-loader!assets/favicon.png';
+import Link from 'next/link';
 
 export const Footer = () => (
   <footer className={classes.root}>
     <ul className={classes.list}>
       <li>
-        <Link to="/about">About</Link>
+        <Link href="/about">
+          <a>About</a>
+        </Link>
       </li>
       <li>
-        <Link to="/privacy-policy">Privacy</Link>
+        <Link href="/privacy-policy">
+          <a>Privacy</a>
+        </Link>
       </li>
       <li>
         <a href="https://www.facebook.com/The-Hollowverse-206704599442186/">
@@ -26,7 +28,7 @@ export const Footer = () => (
       className={classes.logo}
       role="presentation"
       alt={undefined}
-      src={logo}
+      src="/static/favicon.png"
     />
   </footer>
 );

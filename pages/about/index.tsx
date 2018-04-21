@@ -1,4 +1,5 @@
 import React from 'react';
+import 'components/App/App.global.scss';
 import { Footer } from 'components/Footer/Footer';
 import { TextPage } from 'components/TextPage/TextPage';
 
@@ -18,3 +19,5 @@ export const About = () => (
     <Footer />
   </TextPage>
 );
+
+export default About;
